@@ -1,12 +1,12 @@
 package kth.findmyflight
 
+import AirportScreen
+import FlightsVM
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import kth.findmyflight.ui.theme.FindMyFlightTheme
-import kth.findmyflight.ui.AirportScreen
-import kth.findmyflight.ui.viewmodel.FlightsVM
 
 class MainActivity : ComponentActivity() {
     private lateinit var flightVM: FlightsVM
