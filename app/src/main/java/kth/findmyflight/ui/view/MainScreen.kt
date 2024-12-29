@@ -1,0 +1,81 @@
+package kth.findmyflight.ui.view
+
+import FlightsVM
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MainScreen(viewModel: FlightsVM) {
+    val navController = rememberNavController()
+
+    ModalNavigationDrawer(
+        drawerContent = { AppDrawer(navController) }
+    ) {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("Find My Flight") },
+                    navigationIcon = {
+                        IconButton(onClick = { /* Open Drawer */ }) {
+                            Icon(Icons.Default.Menu, contentDescription = "Menu")
+                        }
+                    }
+                )
+            },
+            content = { padding ->
+                NavHost(
+                    navController = navController,
+                    startDestination = "airportScreen",
+                    modifier = Modifier.padding(padding)
+                ) {
+                    composable("airportScreen") { AirportScreen(viewModel) }
+                    composable("flightNumberScreen") { FlightNumberScreen(viewModel) }
+                }
+            }
+        )
+    }
+}
+
+@Composable
+fun AppDrawer(navController: NavController) {
+    Column(modifier = Modifier.padding(16.dp)) {
+        Text(
+            text = "Navigation",
+            style = MaterialTheme.typography.headlineSmall,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+        Button(
+            onClick = { navController.navigate("airportScreen") },
+            modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+        ) {
+            Text("Search by Airport")
+        }
+        Button(
+            onClick = { navController.navigate("flightNumberScreen") },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Search by Flight Number")
+        }
+    }
+}
+
+@Composable
+fun FlightItem(flight: kth.findmyflight.model.Flight) {
+    Column(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+        Text(text = "Flight Status: ${flight.flight_status}")
+        Text(text = "Departure: ${flight.departure.airport}")
+        Text(text = "Arrival: ${flight.arrival.airport}")
+        Text(text = "Airline: ${flight.airline.name}")
+        Text(text = "Departure Time: ${flight.departure.scheduled}")
+    }
+}

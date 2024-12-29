@@ -25,4 +25,21 @@ class FlightsVM : ViewModel() {
             }
         }
     }
+
+    private val _flight = mutableStateOf<FlightData?>(null)
+    val flight: State<FlightData?> = _flight
+
+    fun fetchFlightByFlightNumber(flightNumber: String, flightDate: String) {
+        viewModelScope.launch {
+            val response: Response<FlightData> = flightRepository.getFlightByFlightNumber(flightNumber, flightDate)
+            if (response.isSuccessful) {
+                _flight.value = response.body() // Update the single flight state
+                System.out.println(response)
+            } else {
+                // Log more detailed error information
+                val errorMessage = response.errorBody()?.string() ?: response.message()
+                println("Error: ${response.code()} - $errorMessage")
+            }
+        }
+    }
 }
