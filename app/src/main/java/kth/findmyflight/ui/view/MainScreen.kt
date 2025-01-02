@@ -24,7 +24,7 @@ fun MainScreen(viewModel: FlightsVM) {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text("Find My Flight") },
+                    title = { Text("FindMyFlight") },
                     navigationIcon = {
                         IconButton(onClick = {  }) {
                             Icon(Icons.Default.Menu, contentDescription = "Menu")
@@ -49,11 +49,6 @@ fun MainScreen(viewModel: FlightsVM) {
 @Composable
 fun AppDrawer(navController: NavController) {
     Column(modifier = Modifier.padding(16.dp)) {
-        Text(
-            text = "Navigation",
-            style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
         Button(
             onClick = { navController.navigate("airportScreen") },
             modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)

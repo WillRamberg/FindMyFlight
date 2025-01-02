@@ -76,7 +76,7 @@ fun FlightNumberScreen(viewModel: FlightsVM) {
                     inputError = "Please enter a valid flight number and date (YYYY-MM-DD)."
                 }
             },
-            modifier = Modifier.align(Alignment.End)
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
             Text("Submit")
         }
@@ -121,6 +121,10 @@ fun FlightNumberScreen(viewModel: FlightsVM) {
 
 
                     item { Spacer(modifier = Modifier.height(16.dp)) }
+
+                    item { SectionTitle("Aircraft Details") }
+                    item { DetailRow("Aircraft Iata", flight.aircraft.iata) }
+                    item { DetailRow("Registration", flight.aircraft.registration) }
 
                     item { Spacer(modifier = Modifier.height(16.dp)) }
 

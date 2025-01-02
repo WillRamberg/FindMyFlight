@@ -10,7 +10,8 @@ data class Flight(
     val departure: Departure,
     val arrival: Arrival,
     val airline: Airline,
-    val flight: FlightDetails
+    val flight: FlightDetails,
+    val aircraft: Aircraft
 )
 
 data class Departure(
@@ -50,7 +51,14 @@ data class FlightDetails(
     val number: String,
     val iata: String,
     val icao: String,
+    val registration: String,
     val codeshared: Codeshared?
+)
+
+data class Aircraft(
+    val iata: String,
+    val icao: String,
+    val registration: String
 )
 
 data class Codeshared(
