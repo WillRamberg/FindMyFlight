@@ -22,7 +22,8 @@ data class Departure(
     val gate: String?,
     val delay: Int?,
     val scheduled: String,
-    val estimated: String
+    val estimated: String,
+    val actual: String
 )
 
 data class Arrival(
@@ -35,7 +36,8 @@ data class Arrival(
     val baggage: String?,
     val delay: Int?,
     val scheduled: String,
-    val estimated: String
+    val estimated: String,
+    val actual: String
 )
 
 data class Airline(
