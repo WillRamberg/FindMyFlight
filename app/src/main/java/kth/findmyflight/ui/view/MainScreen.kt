@@ -26,7 +26,7 @@ fun MainScreen(viewModel: FlightsVM) {
                 TopAppBar(
                     title = { Text("Find My Flight") },
                     navigationIcon = {
-                        IconButton(onClick = { /* Open Drawer */ }) {
+                        IconButton(onClick = {  }) {
                             Icon(Icons.Default.Menu, contentDescription = "Menu")
                         }
                     }
@@ -69,13 +69,3 @@ fun AppDrawer(navController: NavController) {
     }
 }
 
-@Composable
-fun FlightItem(flight: kth.findmyflight.model.Flight) {
-    Column(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
-        Text(text = "Flight Status: ${flight.flight_status}")
-        Text(text = "Departure: ${flight.departure.airport}")
-        Text(text = "Arrival: ${flight.arrival.airport}")
-        Text(text = "Airline: ${flight.airline.name}")
-        Text(text = "Departure Time: ${flight.departure.scheduled}")
-    }
-}

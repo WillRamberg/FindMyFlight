@@ -18,10 +18,15 @@ class FlightsVM : ViewModel() {
         viewModelScope.launch {
             val response: Response<FlightData> = flightRepository.getDeparturesByAirport(airportCode)
             if (response.isSuccessful) {
-                val flightData = response.body()
-                _flights.value = flightData?.data ?: emptyList() // Update the flights state
+                response.body()?.let { flightData ->
+                    // Sort flights by scheduled departure time
+                    _flights.value = flightData.data.sortedBy { it.departure.scheduled }
+                } ?: run {
+                    _flights.value = emptyList() // In case the data is null
+                }
             } else {
-                println("Error: ${response.message()}")
+                val errorMessage = response.errorBody()?.string() ?: response.message()
+                println("Error: ${response.code()} - $errorMessage")
             }
         }
     }

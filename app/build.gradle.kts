@@ -63,4 +63,6 @@ dependencies {
     implementation (libs.androidx.activity.compose.v161)
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
+    implementation(libs.androidx.material.icons.extended)
+
 }
